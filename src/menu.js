@@ -4,7 +4,7 @@ import { components } from './modules/components.module';
 export class ContextMenu extends Menu {
 	constructor(selector) {
 		super(selector);
-		this.$rootElem = document.querySelector('#menu');
+		this.$rootElem = document.querySelector('selector');
 
 		this.$rootElem.addEventListener('click', (e) => {
 			const { type } = e.target.dataset;
