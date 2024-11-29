@@ -40,3 +40,17 @@ body {
 .menu .menu-item:hover {
     background: #343434;
 }
+
+.custom-message {
+    position: fixed;
+    z-index: 1000;
+    background: #D1C7BD;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: #322D29;
+    font-size: 16px;
+    bottom: 20px;
+    right: 20px;
+    transform: translateY(100%);
+    transition: transform 0.5s ease-in-out;
+}
