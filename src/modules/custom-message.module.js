@@ -26,13 +26,11 @@ export class CustomMessageModule extends Module {
     if (this.#elementTimeoutId) {
       clearTimeout(this.#elementTimeoutId)
       this.#$rootElement.remove()
-    }
-    if (this.#animationTimeoutID) {
+    } else if (this.#animationTimeoutID) {
       clearTimeout(this.#animationTimeoutID)
     }
     
-    const randomMessage = this.#messages[random(0, this.#messages.length - 1)]
-    this.#$rootElement.textContent = randomMessage
+    this.#$rootElement.textContent = this.#messages[random(0, this.#messages.length - 1)]
     document.body.appendChild(this.#$rootElement)
 
     setTimeout(() => {
