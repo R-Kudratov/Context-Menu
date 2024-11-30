@@ -16,23 +16,22 @@ export class CustomMessageModule extends Module {
 
   trigger() {
     if (this.#elementTimeoutId) {
-      clearTimeout(this.#elementTimeoutId)
-      this.#$rootElement.remove()
-    } else if (this.#animationTimeoutID) {
-      clearTimeout(this.#animationTimeoutID)
+      this.#removeElement(this.#elementTimeoutId)
+    }
+    if (this.#animationTimeoutID) {
+      this.#removeElement(this.#animationTimeoutID)
     }
     
     this.#createRandomMessageElement(this.#$rootElement)
     
-
     setTimeout(() => {
       this.#$rootElement.style.transform = 'translateY(0)'
     }, 0)
 
     this.#elementTimeoutId = setTimeout(() => {
       this.#$rootElement.style.transform = 'translateY(100%)'
-      this.#animationTimeoutID =setTimeout(() => {
-        this.#$rootElement.remove()
+      this.#animationTimeoutID = setTimeout(() => {
+        if (this.#$rootElement) this.#$rootElement.remove()
       }, 500);
     }, random(1000, 5000))
   }
@@ -41,12 +40,17 @@ export class CustomMessageModule extends Module {
     const messages = [
       'Привет, это кастомное сообщение!',
       `Сейчас ${new Date().toLocaleTimeString("en-GB")}`,
-      'Тут могла быть ваша реклама.',
-      'Lorem ipsum dolor sit amet.',
+      'Тут могла быть ваша реклама',
+      'Lorem ipsum dolor sit amet',
       `Ваш браузер ${navigator.userAgentData.brands[0].brand} версии ${navigator.userAgentData.brands[0].version}`,
       `Ваша система ${navigator.userAgentData.platform}`,
     ]
     element.textContent = messages[random(0, messages.length - 1)]
     document.body.appendChild(element)
+  }
+
+  #removeElement(timeoutId) {
+    clearTimeout(timeoutId)
+    this.#$rootElement.remove()
   }
 }
