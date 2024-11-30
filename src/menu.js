@@ -13,6 +13,7 @@ export class ContextMenu extends Menu {
 		this.#$rootElem.addEventListener('click', (e) => {
 			const { type } = e.target.dataset;
 			this.#modules[type].trigger();
+			this.close();
 		});
 
 		Object.values(this.#modules).forEach((module) => {
