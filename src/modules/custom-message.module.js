@@ -3,7 +3,6 @@ import {random} from '../utils'
 
 export class CustomMessageModule extends Module {
   #$rootElement
-  #messages
   #elementTimeoutId
   #animationTimeoutID
 
@@ -11,13 +10,6 @@ export class CustomMessageModule extends Module {
     super(type, text)
     this.#$rootElement = document.createElement('div')
     this.#$rootElement.classList.add('custom-message')
-    this.#messages = [
-      'Привет, это кастомное сообщение!',
-      'Какая сегодня прекрасная погода!',
-      `Сейчас ${new Date().toLocaleTimeString("en-GB")}`,
-      'Сегодня отличный день!',
-      'Тут могла быть ваша реклама.'
-    ]
     this.#elementTimeoutId = null
     this.#animationTimeoutID = null
   }
@@ -30,8 +22,8 @@ export class CustomMessageModule extends Module {
       clearTimeout(this.#animationTimeoutID)
     }
     
-    this.#$rootElement.textContent = this.#messages[random(0, this.#messages.length - 1)]
-    document.body.appendChild(this.#$rootElement)
+    this.#createRandomMessageElement(this.#$rootElement)
+    
 
     setTimeout(() => {
       this.#$rootElement.style.transform = 'translateY(0)'
@@ -43,5 +35,18 @@ export class CustomMessageModule extends Module {
         this.#$rootElement.remove()
       }, 500);
     }, random(1000, 5000))
+  }
+
+  #createRandomMessageElement(element) {
+    const messages = [
+      'Привет, это кастомное сообщение!',
+      `Сейчас ${new Date().toLocaleTimeString("en-GB")}`,
+      'Тут могла быть ваша реклама.',
+      'Lorem ipsum dolor sit amet.',
+      `Ваш браузер ${navigator.userAgentData.brands[0].brand} версии ${navigator.userAgentData.brands[0].version}`,
+      `Ваша система ${navigator.userAgentData.platform}`,
+    ]
+    element.textContent = messages[random(0, messages.length - 1)]
+    document.body.appendChild(element)
   }
 }
