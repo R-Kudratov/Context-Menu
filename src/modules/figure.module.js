@@ -31,6 +31,7 @@ export class FigureModule extends Module {
 
     trigger() {
         if (this.#timeoutId !== '') {
+            clearTimeout(this.#timeoutId);
             this.#timeoutId = '';
         }
 
@@ -47,7 +48,8 @@ export class FigureModule extends Module {
         this.#showElement(this.#$rootElement);
 
         this.#timeoutId = setTimeout(() => {
-            this.#removeElement(this.#$rootElement)
+            this.#removeElement(this.#$rootElement);
+            clearTimeout(this.#timeoutId);
         }, 3000);
 
     }
