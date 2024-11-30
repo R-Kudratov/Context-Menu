@@ -103,16 +103,19 @@ body {
     cursor: pointer;
     transition: opacity .2s;
 }
+
 @media (hover:hover) {
     .timer__btn:hover {
         opacity: 0.8;
     }
 }
+
 @media (hover:none) {
     .timer__btn:active {
         opacity: 0.8;
     }
 }
+
 .timer__exit {
     background-color: #CD5C5C;
     border: 3px solid #CD5C5C;
@@ -123,4 +126,5 @@ body {
     position: absolute;
     opacity: 0;
     transition: opacity .2s linear;
+    transform: translate(-50%, -50%);
 }

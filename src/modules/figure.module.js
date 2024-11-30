@@ -42,8 +42,10 @@ export class FigureModule extends Module {
         this.#$rootElement.style.width = `${figureWidthAndHeight}px`;
         this.#$rootElement.style.height = `${figureWidthAndHeight}px`;
 
-        this.#$rootElement.style.top = `${random(0, 100)}%`
-        this.#$rootElement.style.left = `${random(0, 100)}%`
+        const maxWidth = window.innerWidth - 250;
+        const maxHeight = window.innerHeight - 250; 
+        this.#$rootElement.style.top = `${random(250, maxWidth)}px`
+        this.#$rootElement.style.left = `${random(250, maxHeight)}px`
 
         this.#showElement(this.#$rootElement);
 
