@@ -23,12 +23,11 @@ export class ClicksModule extends Module {
         this.#$startAgainBtn.textContent = 'Начать заново';
         this.#$startAgainBtn.classList.add('timer__btn');
         this.#$startAgainBtn.addEventListener('click', this.#startGame.bind(this))
-
-        this.#SECONDS_LIMIT = 5;
-        // this.#$rootElement.textContent = `Осталось времени: ${this.#SECONDS_LIMIT}c`;
+        
         this.#$rootElement.append(this.#$textContainer, this.#$timeContainer);
 
         this.#clicksCounter = 0;
+        this.#SECONDS_LIMIT = 5;
 
         document.addEventListener('click', this.#countClicks.bind(this))
 
