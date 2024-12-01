@@ -50,6 +50,7 @@ export class RandomQuoteModule extends Module {
       this.#$rootElement.append(this.#quoteText, this.#quoteAuthor)
       document.body.appendChild(this.#$rootElement)
 
+      
       setTimeout(() => {
         this.#$rootElement.style.opacity = '1'
       }, 0)
@@ -58,7 +59,7 @@ export class RandomQuoteModule extends Module {
         this.#$rootElement.style.opacity = '0'
         this.#animationTimeoutID = setTimeout(() => {
           if (this.#$rootElement) this.#$rootElement.remove()
-        }, 500);
+        }, 500)
       }, 10000)
 
     } catch (error) {

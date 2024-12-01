@@ -136,6 +136,7 @@ body {
 
 /* Quote */
 .quote__container {
+    background: #fff;
     position: fixed;
     bottom: 20px;
     left: 50%;

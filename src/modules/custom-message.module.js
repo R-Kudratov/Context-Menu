@@ -32,7 +32,7 @@ export class CustomMessageModule extends Module {
       this.#$rootElement.style.transform = 'translateY(100%)'
       this.#animationTimeoutID = setTimeout(() => {
         if (this.#$rootElement) this.#$rootElement.remove()
-      }, 500);
+      }, 500)
     }, random(1000, 5000))
   }
 
