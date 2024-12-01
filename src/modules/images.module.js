@@ -65,7 +65,7 @@ export class ImagesModule extends Module {
 
 	#addImg() {
 		const $loader = document.createElement('div');
-		$loader.classList.add('img__wrapper', 'loader');
+		$loader.classList.add('loader');
 
 		const randomIndex = random(0, this.#imgNames.length - 1);
 		const randomName = this.#imgNames[randomIndex];
