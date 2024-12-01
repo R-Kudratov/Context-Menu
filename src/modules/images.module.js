@@ -90,11 +90,17 @@ export class ImagesModule extends Module {
 	}
 
 	async #getImageData() {
-		const url = 'https://random.dog/doggos'; //'https://jsonplaceholder.typicode.com/photos';
-		const request = await fetch(url);
-		const imgNames = await request.json();
-		const jpgImgNames = imgNames.filter((imgName) => imgName.includes('.jpg'));
+		try {
+			const url = 'https://random.dog/doggos'; //'https://jsonplaceholder.typicode.com/photos';
+			const request = await fetch(url);
+			const imgNames = await request.json();
+			const jpgImgNames = imgNames.filter((imgName) =>
+				imgName.includes('.jpg')
+			);
 
-		return jpgImgNames;
+			return jpgImgNames;
+		} catch {
+			this.$imgContainer.textContent = 'Не удалось получить данные с сервера';
+		}
 	}
 }
