@@ -2,17 +2,17 @@ import { Module } from '../core/module';
 import { random } from '../utils';
 
 export class ImagesModule extends Module {
-	#images;
+	#imgNames;
 
 	constructor(type, text) {
 		super(type, text);
 		this.$rootElem = document.body;
-		this.#images = [];
+		this.#imgNames = [];
 	}
 
 	async trigger() {
-		if (this.#images.length === 0) {
-			this.#images = await this.#getImageData();
+		if (this.#imgNames.length === 0) {
+			this.#imgNames = await this.#getImageData();
 		}
 		const container = document.querySelector('.main-img-container');
 		if (!container) {
@@ -20,7 +20,7 @@ export class ImagesModule extends Module {
 		}
 	}
 
-	async #render() {
+	#render() {
 		const $container = document.createElement('div');
 		$container.classList.add('main-img-container');
 
@@ -63,12 +63,12 @@ export class ImagesModule extends Module {
 		this.$rootElem.append($container);
 	}
 
-	async #addImg() {
+	#addImg() {
 		const $loader = document.createElement('div');
 		$loader.classList.add('img__wrapper', 'loader');
 
-		const randomIndex = random(0, this.#images.length - 1);
-		const randomName = this.#images[randomIndex];
+		const randomIndex = random(0, this.#imgNames.length - 1);
+		const randomName = this.#imgNames[randomIndex];
 
 		const url = `https://random.dog/${randomName}`;
 		const $imageWrapper = document.createElement('div');

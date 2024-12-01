@@ -15,5 +15,5 @@ export const components = {
 	),
 	clicksModule: new ClicksModule('clicksModule', 'Считать клики (за 5 секунд)'),
 	figureModule: new FigureModule('figureModule', 'Создать фигуру'),
-	imagesModule: new ImagesModule('imagesModule', 'Картинка'),
+	imagesModule: new ImagesModule('imagesModule', 'Посмотреть картинки'),
 };
