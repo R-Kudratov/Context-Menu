@@ -9,7 +9,7 @@ export class CustomMessageModule extends Module {
   constructor(type, text) {
     super(type, text)
     this.#$rootElement = document.createElement('div')
-    this.#$rootElement.classList.add('custom-message')
+    this.#$rootElement.classList.add('custom-message', 'with-shadow')
     this.#elementTimeoutId = null
     this.#animationTimeoutID = null
   }
