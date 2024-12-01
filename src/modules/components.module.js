@@ -5,6 +5,7 @@ import { ClicksModule } from './clicks.module';
 import { FigureModule } from './figure.module';
 import { ImagesModule } from './images.module';
 import { SoundModule } from './sound.module';
+import { CountdownTimerModule } from './countdown-timer.module';
 
 export const components = {
 	backgroundModule: new BackgroundModule('backgroundModule','Поменять цвет фона'),
@@ -13,5 +14,6 @@ export const components = {
 	figureModule: new FigureModule('figureModule', 'Создать фигуру'),
 	randomQuoteModule: new RandomQuoteModule('randomQuoteModule', 'Прочитать цитату'),
 	imagesModule: new ImagesModule('imagesModule', 'Посмотреть картинки'),
-	soundModule: new SoundModule('soundModule', 'Случайный звук')
+	soundModule: new SoundModule('soundModule', 'Случайный звук'),
+	countdownTimerModule: new CountdownTimerModule('countdownTimerModule', 'Вызвать таймер'),
 };
