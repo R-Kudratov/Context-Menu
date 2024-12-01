@@ -25,7 +25,12 @@ export class RandomQuoteModule extends Module {
 
   async #fetchQuote() {
     try {
-      const response = await fetch(this.#API_URL)
+      const response = await fetch(this.#API_URL, {
+        method: 'GET',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+      })
       if (!response.ok) {
         throw new Error()
       }
@@ -46,7 +51,11 @@ export class RandomQuoteModule extends Module {
     try {
       const quoteData = await this.#fetchQuote()
       this.#quoteText.textContent = quoteData.quoteText
-      this.#quoteAuthor.textContent = quoteData.quoteAuthor
+      if (quoteData.quoteAuthor) {
+        this.#quoteAuthor.textContent = quoteData.quoteAuthor
+      } else {
+        this.#quoteAuthor.textContent = 'Неизвестный автор'
+      }
       this.#$rootElement.append(this.#quoteText, this.#quoteAuthor)
       document.body.appendChild(this.#$rootElement)
 
