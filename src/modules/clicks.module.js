@@ -54,7 +54,7 @@ export class ClicksModule extends Module {
             this.#$buttonsContainer.remove();
         }
         let seconds = this.#SECONDS_LIMIT;
-        this.#$textContainer.textContent = `Начали!`;
+        this.#$textContainer.textContent = `Начали! Осталось времени:`;
         this.#$timeContainer.classList.remove('result');
         this.#$timeContainer.textContent = `${seconds}`;
         this.#clicksCounter = 0;
