@@ -26,7 +26,7 @@ export class ImagesModule extends Module {
 		$imgContainer.addEventListener('click', (e) => {
 			const { tagName } = e.target;
 			if (tagName === 'IMG') {
-				e.target.remove();
+				e.target.parentElement.remove();
 			}
 		});
 		this.$imgContainer = $imgContainer;
@@ -43,7 +43,7 @@ export class ImagesModule extends Module {
 		$deleteButton.textContent = 'Удалить все';
 		$deleteButton.classList.add('btn', 'delete-btn');
 		$deleteButton.addEventListener('click', () => {
-			const images = this.$imgContainer.querySelectorAll('img');
+			const images = this.$imgContainer.querySelectorAll('.img__wrapper');
 			images.forEach((img) => img.remove());
 		});
 
@@ -67,12 +67,15 @@ export class ImagesModule extends Module {
 		const randomName = this.#images[randomIndex];
 		console.log(randomName);
 		const url = `https://random.dog/${randomName}`;
+		const $imageWrapper = document.createElement('div');
+		$imageWrapper.classList.add('img__wrapper');
 		const $img = document.createElement('img');
 		$img.classList.add('img');
 		$img.alt = 'This is dog';
 		$img.src = url;
 		$img.title = 'Нажмите для удаления';
-		this.$imgContainer.append($img);
+		$imageWrapper.append($img)
+		this.$imgContainer.append($imageWrapper);
 	}
 
 	async #getImageData() {
