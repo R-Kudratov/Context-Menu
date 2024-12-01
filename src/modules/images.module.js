@@ -10,7 +10,10 @@ export class ImagesModule extends Module {
 		this.#images = [];
 	}
 
-	trigger() {
+	async trigger() {
+		if (this.#images.length === 0) {
+			this.#images = await this.#getImageData();
+		}
 		const container = document.querySelector('.main-img-container');
 		if (!container) {
 			this.#render();
@@ -24,9 +27,10 @@ export class ImagesModule extends Module {
 		const $imgContainer = document.createElement('div');
 		$imgContainer.classList.add('img-container');
 		$imgContainer.addEventListener('click', (e) => {
-			const { tagName } = e.target;
-			if (tagName === 'IMG') {
-				e.target.parentElement.remove();
+			const { target } = e;
+			if (target.className.includes('delete-btn')) {
+				const deletedElem = target.closest('.img__wrapper');
+				deletedElem.remove();
 			}
 		});
 		this.$imgContainer = $imgContainer;
@@ -39,10 +43,10 @@ export class ImagesModule extends Module {
 		$addButton.classList.add('btn', 'add-btn');
 		$addButton.addEventListener('click', this.#addImg.bind(this));
 
-		const $deleteButton = document.createElement('button');
-		$deleteButton.textContent = 'Удалить все';
-		$deleteButton.classList.add('btn', 'delete-btn');
-		$deleteButton.addEventListener('click', () => {
+		const $deleteAllButton = document.createElement('button');
+		$deleteAllButton.textContent = 'Удалить все';
+		$deleteAllButton.classList.add('btn', 'delete-all-btn');
+		$deleteAllButton.addEventListener('click', () => {
 			const images = this.$imgContainer.querySelectorAll('.img__wrapper');
 			images.forEach((img) => img.remove());
 		});
@@ -50,31 +54,38 @@ export class ImagesModule extends Module {
 		const $closeButton = document.createElement('button');
 		$closeButton.textContent = 'Закрыть';
 		$closeButton.classList.add('btn', 'close-btn');
-		$closeButton.addEventListener('click', (e) => {
+		$closeButton.addEventListener('click', () => {
 			$container.remove();
 		});
 
-		$buttonsContainer.append($addButton, $deleteButton, $closeButton);
+		$buttonsContainer.append($addButton, $deleteAllButton, $closeButton);
 		$container.append($buttonsContainer, $imgContainer);
 		this.$rootElem.append($container);
 	}
 
 	async #addImg() {
-		if (this.#images.length === 0) {
-			this.#images = await this.#getImageData();
-		}
+		const $loader = document.createElement('div');
+		$loader.classList.add('img__wrapper', 'loader');
+
 		const randomIndex = random(0, this.#images.length - 1);
 		const randomName = this.#images[randomIndex];
-		console.log(randomName);
+
 		const url = `https://random.dog/${randomName}`;
 		const $imageWrapper = document.createElement('div');
 		$imageWrapper.classList.add('img__wrapper');
+
+		const $deleteButton = document.createElement('div');
+		$deleteButton.classList.add('delete-btn');
+		$deleteButton.title = 'Удалить';
+
 		const $img = document.createElement('img');
 		$img.classList.add('img');
 		$img.alt = 'This is dog';
 		$img.src = url;
-		$img.title = 'Нажмите для удаления';
-		$imageWrapper.append($img)
+
+		$img.addEventListener('load', () => ($loader.style.display = 'none'));
+
+		$imageWrapper.append($loader, $img, $deleteButton);
 		this.$imgContainer.append($imageWrapper);
 	}
 

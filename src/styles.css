@@ -127,6 +127,8 @@ body {
 	transition: opacity 0.2s linear;
 }
 
+/* Images  */
+
 .main-img-container {
 	display: flex;
 	padding: 0;
@@ -135,11 +137,10 @@ body {
 
 .img-container {
 	display: flex;
-	justify-content: stretch;
+	justify-content: start;
 	flex-wrap: wrap;
-	align-items: center;
+	align-items: start;
 	width: 85%;
-	min-height: 50vh;
 	margin: 0;
 	margin-left: 200px;
 	border-left: 2px solid black;
@@ -150,7 +151,6 @@ body {
 	max-width: 250px;
 	max-height: 250px;
 	margin: 2px;
-	cursor: pointer;
 }
 
 .buttons-container {
@@ -172,6 +172,8 @@ body {
 	width: 200px;
 	height: 200px;
 	overflow: hidden;
+	text-align: right;
+	position: relative;
 }
 
 .img__wrapper img {
@@ -196,13 +198,59 @@ body {
 	margin-bottom: 10px;
 }
 
-.delete-btn {
+.delete-all-btn {
 	border: 3px solid #dd7973;
 	background-color: #dd7973;
 }
 
-.close-btn {
-	border: 3px solid  #9ACEEB;
-	background-color:  #9ACEEB;
+.delete-btn {
+	margin: 0;
+	padding: 2px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	border: 1px solid #eee;
+	display: none;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	z-index: 1;
+	cursor: pointer;
+	text-align: center;
 
+	background-color: #dd7973;
+	color: #eee;
+}
+
+.delete-btn::after {
+	content: 'x';
+	position: relative;
+	bottom: 2px;
+}
+
+.img__wrapper:hover .delete-btn {
+	display: inline-block;
+}
+
+.close-btn {
+	border: 3px solid #9aceeb;
+	background-color: #9aceeb;
+}
+
+.loader {
+	border: 16px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 16px solid #3498db;
+	width: 100%;
+	height: 100%;
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
