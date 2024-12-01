@@ -1,17 +1,13 @@
 import { Module } from '../core/module'
-import { startTimer } from '../utils'
-import { showTimerEndMessage } from '../utils'
 
 export class CountdownTimerModule extends Module {
 	#$rootElement
 	#time
-	#message
 
 	constructor(type, text) {
 		super(type, text)
 		this.#$rootElement = document.createElement('div')
 		this.#$rootElement.className = 'countdown-timer'
-		this.#message = 'Время вышло'
 	}
 
 	trigger() {
@@ -19,8 +15,36 @@ export class CountdownTimerModule extends Module {
 		if (this.#time) {
 			document.body.append(this.#$rootElement)
 			this.#$rootElement.innerText = this.#time
-			startTimer(this.#$rootElement, this.#time)
-			setTimeout(showTimerEndMessage, this.#time * 1000, this.#message)
+			this.startTimer()
+			setTimeout(this.showTimerEndMessage, this.#time * 1000)
 		}
+	}
+
+	startTimer() {
+		const timer = setInterval(() => {
+			if (this.#time <= 1) {
+				clearInterval(timer)
+				this.#$rootElement.remove()
+			} else {
+				this.#time--
+				this.#$rootElement.innerText = this.#time
+			}
+		}, 1000)
+	}
+
+	showTimerEndMessage = () => {
+		const messageItem = document.createElement('div')
+		messageItem.className = 'timer-message'
+		messageItem.innerText = 'Время вышло'
+		const buttonItem = document.createElement('button')
+		buttonItem.className = 'timer-button'
+		buttonItem.innerText = 'ОК'
+
+		buttonItem.addEventListener('click', () => {
+			messageItem.remove()
+		})
+
+		messageItem.append(buttonItem)
+		document.body.append(messageItem)
 	}
 }

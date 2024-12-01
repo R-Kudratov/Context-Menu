@@ -56,31 +56,32 @@ body {
 }
 
 .countdown-timer, .timer-message {
+	display: flex;
+	align-items: center;
 	background: #b1dd8f;
 	border-radius: 14px;
-	width: 400px;
+	width: 30vw;
+	min-width: 320px;
 	height: 30vh;
 	margin: 35vh auto;
 }
 
 .countdown-timer {
-	padding: 100px 0 0;
+	justify-content: center;
 	font-size: 60px;
-	text-align: center;
 }
 
 .timer-message {
-	display: flex;
 	flex-direction: column;
-	align-items: center;
-	padding: 50px 0 0;
-	font-size: 50px;
+	row-gap: 6vh;
+	padding: 6vh 0 3vh;
+	font-size: 6vh;
 }
 
 .timer-button {
-	margin-top: 50px;
-	font-size: 30px;
-	width: 200px;
+	font-size: 5vh;
+	width: 20vw;
+	max-width: 200px;
 	height: 60px;
 	border: 1px solid #343434;
 	border-radius: 14px;
